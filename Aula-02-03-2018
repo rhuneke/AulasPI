@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package swingapp2;
+import java.awt.Button;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+/**
+ *
+ * @author rubens.fhuneke
+ */
+public class Main {
+    
+    public static void main(String[] args) {
+        
+    //runnable é uma interface (especie de contrarto que o java tem) para thread, abre duas linhas paralelas de execução
+    //ai vc cria uma classe anonima runnable como new
+    Runnable thread = new Runnable() {
+        //classe anonima e vc cria o metodo
+        public void run() {
+            criarGUI();
+        } 
+    };
+    //aqui ele inicia thread
+    SwingUtilities.invokeLater(thread);
+    
+    }
+    //1.a coisa a fazer dentro da classe main
+    public static void criarGUI(){
+        //é a tela
+        JFrame frame= new JFrame();
+        // configirar a tela
+        frame.setMinimumSize (new Dimension (400, 600));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Swing App 02");
+        
+        JPanel panel = new JPanel();
+        frame.getContentPane().add(panel);
+        
+        
+        // é titulo?Nome etxto 
+        JLabel label = new JLabel("Teste");
+        
+        panel.add(label);
+        
+        
+        //Campo
+        JTextField field = new JTextField(10);
+        JTextField fieldB = new JTextField(10);
+        panel.add(field);
+        panel.add(fieldB);
+        
+        //Botão
+        JButton button = new JButton ("Botão");
+        panel.add(button);
+      
+        //Ordem para execução do botão
+        button.addActionListener (new ActionListener () {
+            public void actionPerformed (ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Valor Digitado: " + field.getText() + " " + fieldB.getText());
+            }
+        });
+        
+        
+        //Compacta todo mundo na tela
+        frame.pack();
+        //Faz aparecer a janela
+        frame.setVisible(true);
+    }
+    
+}
