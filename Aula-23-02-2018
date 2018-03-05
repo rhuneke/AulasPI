@@ -1,0 +1,55 @@
+/*
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
+package aula;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+/**
+*
+* @author rubens.fhuneke
+*/
+public class Aula {
+/**
+* @param args the command line arguments
+*/
+public static void main (String[] args) {
+//Aqui esta a declaração da thread
+Runnable thread = new Runnable () {
+public void run(){
+criarGUI();
+}
+};
+//Aqui inicia a thread
+SwingUtilities.invokeLater(thread);
+}
+
+public static void criarGUI (){
+
+JFrame frame = new JFrame ("Título");
+frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+
+JPanel panel = new JPanel ();
+
+JLabel labelA = new JLabel ("Olá Mundo");
+JLabel labelB = new JLabel ("Olá Mundo2");
+JLabel labelC = new JLabel ("Olá Mundo3");
+
+frame.getContentPane().add(panel);
+panel.add(labelA);
+panel.add(labelB);
+panel.add(labelC);
+
+frame.pack();
+frame.setVisible(true);
+frame.setMinimumSize(new Dimension(500, 500));
+
+frame.setResizable(false);
+
+
+}
+}
